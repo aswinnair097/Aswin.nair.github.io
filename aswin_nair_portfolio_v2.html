@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aswin Nair — Senior IT Systems Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f2eb;
+  --bg2: #ede9df;
+  --ink: #1a1612;
+  --ink2: #3d3730;
+  --muted: #8c8278;
+  --accent: #c84b0f;
+  --accent2: #1a5c8a;
+  --green: #2d7a4f;
+  --border: #d4cfc5;
+  --card: #fff9f0;
+  --tag-bg: #ede9df;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* NOISE TEXTURE */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.4;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3rem;
+  background: rgba(245,242,235,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem; letter-spacing: 0.08em;
+  color: var(--ink);
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--muted);
+  text-decoration: none; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-status {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; color: var(--green);
+  background: rgba(45,122,79,0.1);
+  border: 1px solid rgba(45,122,79,0.3);
+  padding: 0.3rem 0.9rem; border-radius: 3px;
+}
+.status-dot {
+  width: 7px; height: 7px; background: var(--green);
+  border-radius: 50%; animation: blink 1.5s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 8rem 3rem 4rem;
+  gap: 4rem; max-width: 1300px; margin: 0 auto;
+}
+.hero-left { }
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--accent);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  opacity: 0; animation: slideIn 0.5s 0.1s forwards;
+}
+.hero-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 9vw, 9rem);
+  line-height: 0.9; letter-spacing: 0.02em;
+  color: var(--ink);
+  opacity: 0; animation: slideIn 0.6s 0.2s forwards;
+}
+.hero-name .line2 { color: var(--accent); display: block; }
+.hero-role {
+  font-size: 1.1rem; font-weight: 300; color: var(--ink2);
+  margin-top: 1.5rem; line-height: 1.6;
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  opacity: 0; animation: slideIn 0.6s 0.4s forwards;
+}
+.hero-role strong { font-weight: 600; color: var(--ink); }
+.hero-actions {
+  display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+  opacity: 0; animation: slideIn 0.6s 0.55s forwards;
+}
+.btn-solid {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.2rem;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 3px;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-solid:hover { background: #a33c09; transform: translateY(-2px); }
+.btn-ghost {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.2rem;
+  background: transparent; color: var(--ink);
+  border: 1.5px solid var(--border); border-radius: 3px;
+  text-decoration: none; cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Hero Right — Stats card */
+.hero-right {
+  opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
+}
+.hero-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(26,22,18,0.08), 4px 4px 0 var(--border);
+}
+.hero-card-header {
+  background: var(--ink);
+  color: #fff; padding: 1rem 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 0.1em;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.hero-card-header .dots { display: flex; gap: 0.4rem; }
+.hero-card-header .dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-r { background: #ef4444; }
+.dot-y { background: #f59e0b; }
+.dot-g { background: #10b981; }
+.hero-card-body { padding: 1.5rem; }
+.stat-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.stat-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem; letter-spacing: 0.05em; color: var(--ink);
+}
+.stat-val.accent { color: var(--accent); }
+.stat-val.green { color: var(--green); }
+
+/* SECTION COMMON */
+section { position: relative; }
+.section-wrap { max-width: 1300px; margin: 0 auto; padding: 6rem 3rem; }
+.section-header { margin-bottom: 3.5rem; }
+.s-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; color: var(--accent);
+  letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.s-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  letter-spacing: 0.03em; line-height: 1; color: var(--ink);
+}
+.s-rule { height: 2px; background: var(--accent); width: 60px; margin-top: 1rem; }
+
+/* SKILLS */
+#skills { background: var(--ink); color: #fff; }
+#skills .s-title { color: #fff; }
+#skills .s-label { color: #f97316; }
+#skills .s-rule { background: #f97316; }
+
+.skills-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+.skills-intro { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.8; }
+.skills-intro strong { color: #fff; font-weight: 600; }
+
+.skills-categories { display: flex; flex-direction: column; gap: 2.5rem; }
+.skill-cat-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem; letter-spacing: 0.12em;
+  color: #f97316; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.skill-cat-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: rgba(249,115,22,0.3);
+}
+.tags-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.skill-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.05);
+  transition: all 0.2s;
+  cursor: default;
+}
+.skill-tag:hover {
+  border-color: #f97316;
+  color: #f97316;
+  background: rgba(249,115,22,0.08);
+}
+.skill-tag.highlight {
+  background: rgba(249,115,22,0.15);
+  border-color: rgba(249,115,22,0.5);
+  color: #fdba74;
+}
+
+/* EXPERIENCE */
+#experience { background: var(--bg2); }
+.exp-grid { display: grid; gap: 2rem; }
+.exp-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 2px 2px 0 var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.exp-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 4px 6px 0 var(--border);
+}
+.exp-card-top {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 1rem;
+}
+.exp-company-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem; letter-spacing: 0.04em; color: var(--ink);
+}
+.exp-role-title {
+  font-size: 0.88rem; font-weight: 500; color: var(--accent);
+  margin-top: 0.2rem;
+}
+.exp-client {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; color: var(--muted);
+  margin-top: 0.3rem;
+}
+.exp-meta-right { text-align: right; }
+.exp-period {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--muted);
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 0.3rem 0.75rem; border-radius: 2px;
+  display: inline-block; margin-bottom: 0.4rem;
+}
+.exp-location {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; color: var(--muted); display: block;
+}
+.exp-body { padding: 1.5rem 2rem; }
+.exp-section { margin-bottom: 1.5rem; }
+.exp-section:last-child { margin-bottom: 0; }
+.exp-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; color: var(--accent2);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.exp-section-label::before {
+  content: '▶';
+  font-size: 0.5rem; color: var(--accent2);
+}
+.exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+.exp-points li {
+  font-size: 0.875rem; color: var(--ink2); line-height: 1.6;
+  padding-left: 1.2rem; position: relative;
+}
+.exp-points li::before {
+  content: '—';
+  position: absolute; left: 0;
+  color: var(--border); font-size: 0.75rem;
+}
+
+/* TECH SNAPSHOT STRIP */
+.tech-strip {
+  background: var(--accent);
+  padding: 1.5rem 3rem;
+  display: flex; gap: 0; overflow: hidden;
+}
+.strip-scroll {
+  display: flex; gap: 3rem; align-items: center;
+  animation: marquee 25s linear infinite;
+  white-space: nowrap;
+}
+.strip-item {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.8);
+}
+.strip-item span { color: #fff; }
+.strip-sep { color: rgba(255,255,255,0.3); }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* AWARDS */
+#awards { background: var(--bg); }
+.awards-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.award-tile {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 1.75rem 1.5rem;
+  border-radius: 6px;
+  position: relative; overflow: hidden;
+  box-shadow: 2px 2px 0 var(--border);
+  transition: transform 0.2s;
+}
+.award-tile:hover { transform: translateY(-3px); }
+.award-tile::before {
+  content: attr(data-num);
+  position: absolute; top: -0.5rem; right: 0.75rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 5rem; color: var(--bg2);
+  line-height: 1; z-index: 0;
+  pointer-events: none;
+}
+.award-tile-content { position: relative; z-index: 1; }
+.award-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+.award-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700; font-size: 0.95rem;
+  color: var(--ink); margin-bottom: 0.5rem;
+}
+.award-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+/* LANGUAGES */
+#languages { background: var(--bg2); }
+.lang-strip { display: flex; gap: 1rem; flex-wrap: wrap; }
+.lang-pill {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 3px;
+}
+.lang-indicator { display: flex; gap: 3px; }
+.lang-bar {
+  width: 14px; height: 5px; border-radius: 999px;
+  background: var(--border);
+}
+.lang-bar.filled { background: var(--accent2); }
+.lang-name { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.9rem; }
+.lang-level { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* CONTACT */
+#contact { background: var(--ink); color: #fff; }
+#contact .s-title { color: #fff; }
+#contact .s-label { color: #f97316; }
+#contact .s-rule { background: #f97316; }
+
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.contact-desc { color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.8; margin-top: 1rem; }
+.contact-links { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2rem; }
+.c-link {
+  display: flex; align-items: center; gap: 1rem;
+  text-decoration: none; color: rgba(255,255,255,0.75);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;
+  transition: all 0.2s;
+}
+.c-link:hover { border-color: #f97316; color: #f97316; background: rgba(249,115,22,0.05); }
+.c-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  border-radius: 4px; background: rgba(255,255,255,0.06); font-size: 1rem; flex-shrink: 0; }
+
+.profile-box {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 2rem;
+}
+.profile-top { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
+.avatar-ring {
+  width: 70px; height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem; color: #fff; flex-shrink: 0;
+}
+.profile-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.04em; color: #fff; }
+.profile-title { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem; }
+.profile-rows { display: flex; flex-direction: column; gap: 0; }
+.p-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.p-row:last-child { border-bottom: none; }
+.p-key { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; }
+.p-val { font-size: 0.88rem; font-weight: 500; color: rgba(255,255,255,0.85); }
+.p-val.green { color: #4ade80; }
+
+/* FOOTER */
+footer {
+  background: #0f0d0b; padding: 1.5rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+}
+footer p { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: rgba(255,255,255,0.3); }
+footer .acc { color: #f97316; }
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+@keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2.5rem; }
+  .hero-right { display: none; }
+  .section-wrap { padding: 4rem 1.5rem; }
+  .skills-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .awards-row { grid-template-columns: 1fr 1fr; }
+  .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+  footer { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ASWIN<span>.</span>NAIR</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status">
+    <span class="status-dot"></span>
+    Open to Work
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:var(--bg); min-height:100vh; display:flex; align-items:center;">
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Senior IT Systems Engineer · 7 Years</p>
+    <h1 class="hero-name">ASWIN<span class="line2">NAIR</span></h1>
+    <p class="hero-role">
+      Enterprise IT professional specialising in <strong>L2 Desktop Support</strong>, <strong>Active Directory & IAM</strong>, and <strong>Major Incident Management</strong>. Trusted by TCS and Silicon Valley Bank to deliver zero-downtime support across global infrastructure.
+    </p>
+    <div class="hero-actions">
+      <a href="mailto:aswinnair097@gmail.com" class="btn-solid">Hire Me</a>
+      <a href="https://www.linkedin.com/in/aswin-nair-08884825b/" target="_blank" class="btn-ghost">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-card-header">
+        <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+        <span style="color:rgba(255,255,255,0.4)">profile.json</span>
+      </div>
+      <div class="hero-card-body">
+        <div class="stat-row"><span class="stat-key">Experience</span><span class="stat-val accent">7 Years</span></div>
+        <div class="stat-row"><span class="stat-key">Support Level</span><span class="stat-val">Senior L2</span></div>
+        <div class="stat-row"><span class="stat-key">Current Company</span><span class="stat-val">TCS</span></div>
+        <div class="stat-row"><span class="stat-key">Client</span><span class="stat-val" style="font-size:0.95rem;font-family:'Outfit',sans-serif;font-weight:600">Silicon Valley Bank</span></div>
+        <div class="stat-row"><span class="stat-key">SLA Record</span><span class="stat-val green">100%</span></div>
+        <div class="stat-row"><span class="stat-key">Location</span><span class="stat-val" style="font-size:0.9rem;font-family:'Outfit',sans-serif;font-weight:500">Chennai, TN</span></div>
+        <div class="stat-row"><span class="stat-key">Status</span><span class="stat-val green" style="font-size:0.78rem;font-family:'JetBrains Mono',monospace">● Open to Work</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TECH STRIP -->
+<div class="tech-strip">
+  <div class="strip-scroll">
+    <span class="strip-item"><span>Active Directory</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>ServiceNow</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>OKTA MFA</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Microsoft 365</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>SailPoint</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>CyberArk</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>BeyondTrust</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Zscaler VPN</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>VMware Horizon</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Windows 10/11</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>RSA SecureID</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Intune</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Splunk</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Major Incident Management</span></span><span class="strip-sep">·</span>
+    <!-- duplicate for seamless loop -->
+    <span class="strip-item"><span>Active Directory</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>ServiceNow</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>OKTA MFA</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Microsoft 365</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>SailPoint</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>CyberArk</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>BeyondTrust</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Zscaler VPN</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>VMware Horizon</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Windows 10/11</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>RSA SecureID</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Intune</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Splunk</span></span><span class="strip-sep">·</span>
+    <span class="strip-item"><span>Major Incident Management</span></span><span class="strip-sep">·</span>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <p class="s-label">02 · Technical Skills</p>
+      <h2 class="s-title">WHAT I KNOW</h2>
+      <div class="s-rule"></div>
+    </div>
+    <div class="skills-layout">
+      <div class="reveal reveal-delay-1">
+        <p class="skills-intro">
+          Over <strong>7 years</strong> of hands-on enterprise IT experience, I've built a deep, multi-layered skillset spanning <strong>L2 desktop support</strong>, <strong>identity & access management</strong>, <strong>incident management</strong>, and <strong>cloud infrastructure</strong>.<br><br>
+          From ServiceNow to SailPoint, from Windows endpoints to VMware VDI — I deliver solutions that keep businesses running.
+        </p>
+      </div>
+      <div class="skills-categories">
+
+        <div class="reveal reveal-delay-1">
+          <div class="skill-cat-title">Service Desk & Support</div>
+          <div class="tags-cloud">
+            <span class="skill-tag highlight">IT Helpdesk</span>
+            <span class="skill-tag highlight">Service Desk</span>
+            <span class="skill-tag highlight">L2 Support</span>
+            <span class="skill-tag highlight">Remote Desktop Support</span>
+            <span class="skill-tag">Desktop Troubleshooting</span>
+            <span class="skill-tag">Hardware Troubleshooting</span>
+            <span class="skill-tag">Software Troubleshooting</span>
+            <span class="skill-tag">Wi-Fi Troubleshooting</span>
+            <span class="skill-tag">Printer Support</span>
+            <span class="skill-tag">BIOS / Drivers</span>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-2">
+          <div class="skill-cat-title">ITSM & Incident Management</div>
+          <div class="tags-cloud">
+            <span class="skill-tag highlight">ServiceNow</span>
+            <span class="skill-tag highlight">Incident Management</span>
+            <span class="skill-tag highlight">Major Incident Management</span>
+            <span class="skill-tag highlight">SLA Management</span>
+            <span class="skill-tag">Change Management</span>
+            <span class="skill-tag">Request Fulfillment</span>
+            <span class="skill-tag">Knowledge Management</span>
+            <span class="skill-tag">Escalation Management</span>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-3">
+          <div class="skill-cat-title">Identity & Access Management</div>
+          <div class="tags-cloud">
+            <span class="skill-tag highlight">Active Directory</span>
+            <span class="skill-tag highlight">IAM</span>
+            <span class="skill-tag highlight">SailPoint</span>
+            <span class="skill-tag highlight">CyberArk</span>
+            <span class="skill-tag highlight">OKTA MFA</span>
+            <span class="skill-tag highlight">RSA SecureID</span>
+            <span class="skill-tag">PAM Operations</span>
+            <span class="skill-tag">User Lifecycle Mgmt</span>
+            <span class="skill-tag">SSO Provisioning</span>
+            <span class="skill-tag">SharePoint</span>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-1">
+          <div class="skill-cat-title">Cloud & Microsoft Ecosystem</div>
+          <div class="tags-cloud">
+            <span class="skill-tag highlight">Office 365</span>
+            <span class="skill-tag highlight">Microsoft 365</span>
+            <span class="skill-tag highlight">Intune</span>
+            <span class="skill-tag">M365 Admin Portal</span>
+            <span class="skill-tag">Exchange / Mailbox</span>
+            <span class="skill-tag">Teams / Zoom</span>
+            <span class="skill-tag">SCCM</span>
+            <span class="skill-tag">Microsoft Authenticator</span>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-2">
+          <div class="skill-cat-title">Virtual & Remote Infrastructure</div>
+          <div class="tags-cloud">
+            <span class="skill-tag highlight">VMware Horizon</span>
+            <span class="skill-tag highlight">VDI Support</span>
+            <span class="skill-tag highlight">Zscaler VPN</span>
+            <span class="skill-tag highlight">Windows Support</span>
+            <span class="skill-tag">macOS Support</span>
+            <span class="skill-tag">Windows Server</span>
+            <span class="skill-tag">Citrix</span>
+            <span class="skill-tag">Omnissa Horizon</span>
+            <span class="skill-tag">BeyondTrust</span>
+            <span class="skill-tag">TeamViewer</span>
+            <span class="skill-tag">LogMeIn</span>
+            <span class="skill-tag">AnyDesk</span>
+            <span class="skill-tag">RDP</span>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-3">
+          <div class="skill-cat-title">Monitoring & Security</div>
+          <div class="tags-cloud">
+            <span class="skill-tag">Zabbix</span>
+            <span class="skill-tag">Grafana</span>
+            <span class="skill-tag">Splunk</span>
+            <span class="skill-tag">New Relic</span>
+            <span class="skill-tag">Site24x7</span>
+            <span class="skill-tag">Server Monitoring</span>
+            <span class="skill-tag">Patch Management</span>
+            <span class="skill-tag">FTP Server</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <p class="s-label">03 · Career History</p>
+      <h2 class="s-title">EXPERIENCE</h2>
+      <div class="s-rule"></div>
+    </div>
+    <div class="exp-grid">
+
+      <!-- TCS -->
+      <div class="exp-card reveal">
+        <div class="exp-card-top">
+          <div>
+            <div class="exp-company-name">TATA CONSULTANCY SERVICES</div>
+            <div class="exp-role-title">Senior System Engineer — L2 Remote Desktop Support</div>
+            <div class="exp-client">Client: Silicon Valley Bank (A Division of First Citizens Bank)</div>
+          </div>
+          <div class="exp-meta-right">
+            <span class="exp-period">Oct 2024 – Dec 2025</span>
+            <span class="exp-location">📍 Chennai, TN</span>
+          </div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-section">
+            <div class="exp-section-label">Core Responsibilities</div>
+            <ul class="exp-points">
+              <li>Delivered L2 technical support to clients and partners via calls and chat for multiple business applications</li>
+              <li>Performed remote troubleshooting for Windows and macOS devices using BeyondTrust</li>
+              <li>Diagnosed and resolved hardware, software, BIOS, drivers, printers, VDI, and VPN issues</li>
+              <li>Deployed software via SCCM on Windows laptops and VDI; facilitated Mac self-service installs</li>
+              <li>Led incident management bridge calls with support teams, application teams, and management</li>
+              <li>Handled critical incidents — all completed within SLA targets</li>
+            </ul>
+          </div>
+          <div class="exp-section">
+            <div class="exp-section-label">Microsoft 365 & Collaboration</div>
+            <ul class="exp-points">
+              <li>Managed distribution lists, shared mailboxes, and user mailbox configs via M365 Admin Portal</li>
+              <li>Handled access on shared mailboxes, network path drives, email distribution lists, and AD groups</li>
+              <li>Resolved Microsoft Teams, Zoom, and browser-related collaboration issues</li>
+            </ul>
+          </div>
+          <div class="exp-section">
+            <div class="exp-section-label">Active Directory & Identity Management</div>
+            <ul class="exp-points">
+              <li>Managed AD user accounts — create, modify, enable, disable, password resets</li>
+              <li>Administered group policies and user account lifecycle management</li>
+              <li>Configured and managed Citrix user accounts — creating, deleting, modifying access</li>
+              <li>Set up VPN access using hardware and software RSA tokens for end users</li>
+            </ul>
+          </div>
+          <div class="exp-section">
+            <div class="exp-section-label">Security & Compliance (IAM/PAM)</div>
+            <ul class="exp-points">
+              <li>Executed user on/offboarding workflows via SailPoint; maintained access provisioning</li>
+              <li>Managed employee termination — disabling accounts, revoking application and asset access</li>
+              <li>OKTA MFA troubleshooting and SSO provisioning for password synchronisation</li>
+              <li>Supervised system updates and patch management across user devices</li>
+            </ul>
+          </div>
+          <div class="exp-section">
+            <div class="exp-section-label">ITSM — ServiceNow</div>
+            <ul class="exp-points">
+              <li>Documented and tracked issues by generating incidents and tasks in ServiceNow</li>
+              <li>Prioritised, scheduled, and assigned service requests to Tier 3 technicians</li>
+              <li>Escalated complex issues with thorough documentation to next-level support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aptus -->
+      <div class="exp-card reveal reveal-delay-1">
+        <div class="exp-card-top">
+          <div>
+            <div class="exp-company-name">APTUS SOFTWARE LABS PVT. LTD.</div>
+            <div class="exp-role-title">System Administrator</div>
+          </div>
+          <div class="exp-meta-right">
+            <span class="exp-period">Aug 2019 – Sept 2023</span>
+            <span class="exp-location">📍 Bangalore</span>
+          </div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-section">
+            <div class="exp-section-label">Technical Support</div>
+            <ul class="exp-points">
+              <li>Remote tech support for US and Indian users via AnyDesk, TeamViewer, and Google Meet</li>
+              <li>Resolved hardware, software, and installation errors on Windows and macOS platforms</li>
+              <li>Maintained 24-hour SLA for all client tickets consistently</li>
+              <li>Rapidly responded to all alerts, restoring or escalating per established SOPs</li>
+            </ul>
+          </div>
+          <div class="exp-section">
+            <div class="exp-section-label">Server & Application Monitoring</div>
+            <ul class="exp-points">
+              <li>Monitored Zabbix, Grafana, FTP server, Splunk, New Relic, and Site24x7 dashboards</li>
+              <li>Conducted server reboots with client approval, minimising downtime</li>
+              <li>Escalated critical alerts crossing threshold immediately per protocol</li>
+            </ul>
+          </div>
+          <div class="exp-section">
+            <div class="exp-section-label">Training & Administration</div>
+            <ul class="exp-points">
+              <li>Provided on-the-job training and device configuration for new hires</li>
+              <li>Configured and troubleshot complex network environments</li>
+              <li>Administered user accounts and permissions across networked environments</li>
+              <li>Managed email group aliases — adding and removing users</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cognizant -->
+      <div class="exp-card reveal reveal-delay-2">
+        <div class="exp-card-top">
+          <div>
+            <div class="exp-company-name">COGNIZANT TECHNOLOGY SOLUTIONS</div>
+            <div class="exp-role-title">Senior Process Executive</div>
+          </div>
+          <div class="exp-meta-right">
+            <span class="exp-period">Aug 2017 – Jan 2019</span>
+            <span class="exp-location">📍 Coimbatore, TN</span>
+          </div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-section">
+            <div class="exp-section-label">Operations</div>
+            <ul class="exp-points">
+              <li>Reviewed and resolved Medicare and Medicaid claims in compliance with US healthcare regulations</li>
+              <li>Maintained 100% team SLA and quality standards across all processes</li>
+              <li>Managed daily team reports and handled documentation for internal audits and reviews</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <p class="s-label">04 · Recognition & Education</p>
+      <h2 class="s-title">AWARDS &amp; CREDENTIALS</h2>
+      <div class="s-rule"></div>
+    </div>
+    <div class="awards-row">
+      <div class="award-tile reveal" data-num="01">
+        <div class="award-tile-content">
+          <div class="award-icon">🏆</div>
+          <div class="award-title">Highest CSAT Certification</div>
+          <div class="award-desc">Awarded at TCS for achieving the highest customer satisfaction score across the team.</div>
+        </div>
+      </div>
+      <div class="award-tile reveal reveal-delay-1" data-num="02">
+        <div class="award-tile-content">
+          <div class="award-icon">⭐</div>
+          <div class="award-title">Top Client Appreciations — TCS</div>
+          <div class="award-desc">Received the highest number of client appreciation notes at Tata Consultancy Services.</div>
+        </div>
+      </div>
+      <div class="award-tile reveal reveal-delay-2" data-num="03">
+        <div class="award-tile-content">
+          <div class="award-icon">💊</div>
+          <div class="award-title">Galderma & Ezetap Projects</div>
+          <div class="award-desc">Supported pharmaceutical (Galderma) and digital payments (Ezetap) initiatives at Aptus.</div>
+        </div>
+      </div>
+      <div class="award-tile reveal reveal-delay-3" data-num="04">
+        <div class="award-tile-content">
+          <div class="award-icon">🎓</div>
+          <div class="award-title">B.Sc. Computer Technology</div>
+          <div class="award-desc">VLB Janakiammal College of Arts & Science, Coimbatore · 2014–2017 · 80%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <p class="s-label">05 · Communication</p>
+      <h2 class="s-title">LANGUAGES</h2>
+      <div class="s-rule"></div>
+    </div>
+    <div class="lang-strip">
+      <div class="lang-pill reveal">
+        <div class="lang-indicator"><span class="lang-bar filled"></span><span class="lang-bar filled"></span><span class="lang-bar filled"></span></div>
+        <div><div class="lang-name">English</div><div class="lang-level">Native / Bilingual</div></div>
+      </div>
+      <div class="lang-pill reveal reveal-delay-1">
+        <div class="lang-indicator"><span class="lang-bar filled"></span><span class="lang-bar filled"></span><span class="lang-bar filled"></span></div>
+        <div><div class="lang-name">Tamil</div><div class="lang-level">Native / Bilingual</div></div>
+      </div>
+      <div class="lang-pill reveal reveal-delay-2">
+        <div class="lang-indicator"><span class="lang-bar filled"></span><span class="lang-bar filled"></span><span class="lang-bar filled"></span></div>
+        <div><div class="lang-name">Malayalam</div><div class="lang-level">Full Professional</div></div>
+      </div>
+      <div class="lang-pill reveal reveal-delay-3">
+        <div class="lang-indicator"><span class="lang-bar filled"></span><span class="lang-bar"></span><span class="lang-bar"></span></div>
+        <div><div class="lang-name">Kannada</div><div class="lang-level">Limited Working</div></div>
+      </div>
+      <div class="lang-pill reveal reveal-delay-4">
+        <div class="lang-indicator"><span class="lang-bar filled"></span><span class="lang-bar"></span><span class="lang-bar"></span></div>
+        <div><div class="lang-name">Hindi</div><div class="lang-level">Limited Working</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="contact-layout">
+      <div class="reveal">
+        <p class="s-label">06 · Get in Touch</p>
+        <h2 class="s-title">LET'S<br>CONNECT</h2>
+        <div class="s-rule"></div>
+        <p class="contact-desc">7 years of proven IT infrastructure expertise. Available for Senior System Administrator, IT Analyst, L2 Support Lead, or Infrastructure Engineer roles across India or remote.</p>
+        <div class="contact-links">
+          <a href="mailto:aswinnair097@gmail.com" class="c-link">
+            <span class="c-icon">✉️</span>
+            aswinnair097@gmail.com
+          </a>
+          <a href="tel:+916380029182" class="c-link">
+            <span class="c-icon">📱</span>
+            +91 6380029182
+          </a>
+          <a href="https://www.linkedin.com/in/aswin-nair-08884825b/" target="_blank" class="c-link">
+            <span class="c-icon">🔗</span>
+            linkedin.com/in/aswin-nair-08884825b
+          </a>
+        </div>
+      </div>
+      <div class="profile-box reveal reveal-delay-2">
+        <div class="profile-top">
+          <div class="avatar-ring">AN</div>
+          <div>
+            <div class="profile-name">ASWIN NAIR</div>
+            <div class="profile-title">SENIOR IT SYSTEMS ENGINEER</div>
+          </div>
+        </div>
+        <div class="profile-rows">
+          <div class="p-row"><span class="p-key">Specialisation</span><span class="p-val">L2 Support · IAM · ITSM</span></div>
+          <div class="p-row"><span class="p-key">Experience</span><span class="p-val">7 Years</span></div>
+          <div class="p-row"><span class="p-key">Education</span><span class="p-val">B.Sc. Computer Technology</span></div>
+          <div class="p-row"><span class="p-key">Certifications</span><span class="p-val">TCS CSAT Award</span></div>
+          <div class="p-row"><span class="p-key">Based In</span><span class="p-val">Chennai / Coimbatore, India</span></div>
+          <div class="p-row"><span class="p-key">Availability</span><span class="p-val green">● Immediately Available</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span class="acc">Aswin Nair</span>. All rights reserved.</p>
+  <p>Chennai, Tamil Nadu, India</p>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.08 });
+reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
